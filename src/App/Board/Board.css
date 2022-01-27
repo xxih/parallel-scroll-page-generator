@@ -1,0 +1,11 @@
+.paper{
+  height: 667px;
+  width: 375px;
+  background-color: #fff;
+}
+.ps-con-mid{
+  background-color: var(--border-grey);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

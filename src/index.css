@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#root{
+  height: 100%;
+}
+
+:root{
+  --primary-color: deepskyblue;
+  --bg-color: #fff;
+  --shadow: rgba(167, 167, 167, 0.609);
+  --border-grey: #e6e6e6;
+  height: 100%
+}
+
+@import '~antd/dist/antd.css';

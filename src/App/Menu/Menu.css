@@ -1,0 +1,5 @@
+.ps-menu-item{
+  border: 1px solid var(--border-grey);
+  padding: 10px;
+  margin: 10px;
+}

@@ -1,0 +1,15 @@
+.ps-bar{
+  height: 60px;
+  box-shadow: 0 1px 1px var(--shadow);
+  /* background-color: var(--bg-color); */
+  display: flex;
+  align-items: center;
+  /* 增加层叠优先级 */
+  transform: scale(1);
+}
+.ps-bar-btn{
+  margin-left: 20px;
+}
+.ps-bar-btn:last-of-type{
+  margin-right: 20px;
+}
