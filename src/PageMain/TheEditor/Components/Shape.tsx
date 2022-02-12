@@ -1,15 +1,13 @@
-import { selectSelectedPieceIndex, setSelectedPiece, setShapeStyle } from "../../../store/editorSlice"
+import { setSelectedPiece, setShapeStyle } from "../../../store/editorSlice"
 import { useAppDispatch, useAppSelector } from "../../../store/hooks"
 import './Shape.css'
 export default function Shape(props) {
   let { piecesElement, shapeStyle: { left, top }, bindKey:pieceIndex } = props
-  let selectedPieceIndex = useAppSelector(selectSelectedPieceIndex)
+  let selectedPieceIndex = useAppSelector(state=>state.editor.selectedPieceIndex)
   const dispatch = useAppDispatch()
 
   function mouseDownHandler(e) {
     console.log(selectedPieceIndex,pieceIndex);
-    
-    
     dispatch(setSelectedPiece({selectedPieceIndex:pieceIndex}))
 
     const initialOffsetLeft = e.target.offsetParent.offsetLeft
@@ -43,11 +41,12 @@ export default function Shape(props) {
   return (
     <div
       style={{
+        boxSizing:'border-box',
         position: 'absolute',
         left: left + 'px',
         top: top + 'px'
       }}
-      className={selectedPieceIndex===pieceIndex?'active':''}
+      className={['ps-shape',selectedPieceIndex===pieceIndex?'active':''].join(' ')}
       onMouseDown={mouseDownHandler}
     >
       {

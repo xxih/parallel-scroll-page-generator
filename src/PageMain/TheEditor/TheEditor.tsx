@@ -1,5 +1,5 @@
 import { useAppDispatch,useAppSelector } from '../../store/hooks';
-import { addPiece, PieceType, selectPiecesData } from '../../store/editorSlice';
+import { addPiece, PieceData, PieceType } from '../../store/editorSlice';
 import { selectPaperHeight } from '../../store/globalParamSlice';
 import './TheEditor.css'
 import Text from './Components/VText';
@@ -9,10 +9,10 @@ export default function TheEditor() {
   const dispatch = useAppDispatch()
 
   let paperHeight = useAppSelector(selectPaperHeight)
-  let piecesData = useAppSelector(selectPiecesData)
+  let piecesData = useAppSelector(state=>state.editor.piecesData)
 
   // 负责处理整个渲染流程
-  function renderList(piecesData){
+  function renderList(piecesData:Array<PieceData>){
     if(piecesData.length!==0){
       return piecesData.map((item)=>{
         if(item===null){
