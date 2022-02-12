@@ -1,0 +1,16 @@
+.editor-paper{
+  /* height: 2000px; */
+  width: 375px;
+  background-color: #fff;
+  position: relative;
+}
+
+.editor-body{
+  /* margin-top: 50px; */
+  height: 667px;
+  /* 375+23 */
+  width: 398px;
+  position: relative;
+  overflow: scroll;
+  overflow-x: auto;
+}

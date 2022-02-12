@@ -1,5 +1,5 @@
 .ps-bar{
-  height: 60px;
+  min-height: 60px;
   box-shadow: 0 1px 1px var(--shadow);
   /* background-color: var(--bg-color); */
   display: flex;
@@ -9,7 +9,22 @@
 }
 .ps-bar-btn{
   margin-left: 20px;
+  height: 30px;
 }
 .ps-bar-btn:last-of-type{
   margin-right: 20px;
+}
+
+.ps-bar-text{
+  height: 30px;
+  margin-left: 70px;
+  line-height: 30px;
+}
+
+.ps-bar-input{
+  width: 100px;
+}
+
+.ps-bar-switch{
+  margin-left: 10px;
 }

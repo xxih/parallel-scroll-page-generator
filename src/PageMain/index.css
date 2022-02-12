@@ -3,25 +3,30 @@
   flex-direction: column;
   height: 100%;
 }
-.ps-container{
+.ps-layout-main{
   display: flex;
   flex:1; 
 }
-.ps-con-left{
+.ps-layout-main-left{
   flex: 2;
   background-color: var(--bg-color);
   border-right: 1px solid var(--shadow);
 } 
-.ps-con-mid{
+.ps-layout-main-mid{
   flex: 5;
   background-color: var(--bg-color);
+  background-color: var(--border-grey);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
 }
-.ps-con-right{
+.ps-layout-main-right{
   flex: 2;
   background-color: var(--bg-color);
-  
   border-left: 1px solid var(--shadow);
 }
-.ps-layout-block{
-  /* height: 1000px; */
+
+.ps-bar-text-close.ps-bar-text-close{
+  margin-left: 10px;
 }
