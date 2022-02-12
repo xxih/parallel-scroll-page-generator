@@ -2,6 +2,7 @@ import './index.css';
 import TheOptionBar from './TheOptionBar/TheOptionBar';
 import TheMenu from './TheMenu/TheMenu';
 import TheEditor from './TheEditor/TheEditor';
+import ThePanel from './ThePanel/ThePanel';
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <div className="ps-layout-main">
         <TheMenu></TheMenu>
         <TheEditor></TheEditor>
-        <div className="ps-layout-main-right"/>
+        <ThePanel></ThePanel>
       </div>
     </div>
   );

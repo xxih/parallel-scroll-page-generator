@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import PageMain from './PageMain';
+import { Provider } from 'react-redux';
+import { HashRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import {store} from './store/store';
-import { Provider } from 'react-redux';
+import './index.css';
+import PageMain from './PageMain';
+
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store = {store}>
-      <PageMain />
+      <HashRouter>
+        <PageMain />
+      </HashRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

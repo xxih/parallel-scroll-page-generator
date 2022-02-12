@@ -6,6 +6,8 @@
 .ps-layout-main{
   display: flex;
   flex:1; 
+  min-height: 0;
+  /* overflow: auto; */
 }
 .ps-layout-main-left{
   flex: 2;
@@ -18,8 +20,10 @@
   background-color: var(--border-grey);
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 50px;
+  /* align-items: center; */
+  /* padding: 50px; */
+  border: 50px solid rgba(255, 255, 255, 0);
+  overflow: auto;
 }
 .ps-layout-main-right{
   flex: 2;

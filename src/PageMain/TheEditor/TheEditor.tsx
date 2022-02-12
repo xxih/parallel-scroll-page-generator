@@ -1,5 +1,5 @@
 import { useAppDispatch,useAppSelector } from '../../store/hooks';
-import { addPiece, PieceData, PieceType } from '../../store/editorSlice';
+import { addPiece, PieceData, PieceType, setSelectedPiece } from '../../store/editorSlice';
 import { selectPaperHeight } from '../../store/globalParamSlice';
 import './TheEditor.css'
 import Text from './Components/VText';
@@ -38,11 +38,21 @@ export default function TheEditor() {
     let transferObj = {
       type,
       shapeStyle:{
-        left:offsetX,
-        top:offsetY
+        left:offsetX+'px',
+        top:offsetY+'px',
+        width:72+'px',
+        height:24+'px'
       }
     }
     dispatch(addPiece(transferObj))
+  }
+  function clickHandler(e){
+    if(e.currentTarget===e.target){
+
+      dispatch(setSelectedPiece({selectedPieceIndex:-1}))
+    }
+    
+    // if(e.target===)
   }
 
   return (
@@ -54,6 +64,7 @@ export default function TheEditor() {
           height:paperHeight+'px'
         }}
         onDragOver={(e)=>{e.preventDefault()}} 
+        onClick={clickHandler}
         onDrop={(e)=>{dropHandler(e)}}>
         {
           renderList(piecesData)

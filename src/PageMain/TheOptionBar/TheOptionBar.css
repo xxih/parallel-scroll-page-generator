@@ -6,10 +6,12 @@
   align-items: center;
   /* 增加层叠优先级 */
   transform: scale(1);
+  overflow: auto;
 }
 .ps-bar-btn{
   margin-left: 20px;
   height: 30px;
+  /* flex: ; */
 }
 .ps-bar-btn:last-of-type{
   margin-right: 20px;

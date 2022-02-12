@@ -9,8 +9,8 @@
   /* margin-top: 50px; */
   height: 667px;
   /* 375+23 */
-  width: 398px;
+  width: 405px;
   position: relative;
-  overflow: scroll;
+  overflow: auto;
   overflow-x: auto;
 }

@@ -23,8 +23,10 @@ const initialState:EditorState = {
 }
 
 type ShapeStyle = {
-  left?:number,
-  top?:number,
+  left?:string,
+  top?:string,
+  width?:string,
+  height?:string
 }
 
 export const slice = createSlice({

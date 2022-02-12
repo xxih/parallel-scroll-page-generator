@@ -1,5 +1,5 @@
 
 export default function VImage() {
 
-  return <div>Image</div>;
+  return <div className="ps-v-text">Image</div>;
 }
