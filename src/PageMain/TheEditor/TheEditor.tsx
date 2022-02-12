@@ -1,20 +1,20 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { addPiece, selectPiecesData, type pieceData } from '../../store/editorSlice';
+import { useAppDispatch,useAppSelector } from '../../store/hooks';
+import { addPiece, PieceType, selectPiecesData } from '../../store/editorSlice';
 import { selectPaperHeight } from '../../store/globalParamSlice';
 import './TheEditor.css'
 import Text from './Components/VText';
 import Shape from './Components/Shape';
 
 export default function TheEditor() {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
-  let paperHeight = useSelector(selectPaperHeight)
-  let piecesData = useSelector(selectPiecesData)
+  let paperHeight = useAppSelector(selectPaperHeight)
+  let piecesData = useAppSelector(selectPiecesData)
 
   // 负责处理整个渲染流程
-  function renderList(piecesData:Array<pieceData>){
+  function renderList(piecesData){
     if(piecesData.length!==0){
-      return Array.from(piecesData).map((item)=>{
+      return piecesData.map((item)=>{
         if(item===null){
           
         }
@@ -33,7 +33,7 @@ export default function TheEditor() {
   
   function dropHandler(e:React.DragEvent){
     // drop 得 dragOver preventDefault 才能成功
-    const type = e.dataTransfer.getData('type')
+    const type  = e.dataTransfer.getData('type') as PieceType
     const { offsetX,offsetY } = e.nativeEvent
     let transferObj = {
       type,

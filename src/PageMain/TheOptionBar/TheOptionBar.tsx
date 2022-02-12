@@ -1,13 +1,13 @@
 import './TheOptionBar.css'
 import { Button } from 'antd/lib/radio';
 import { Input,message, Switch } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
 import { changePaperHeight, selectPaperHeight } from '../../store/globalParamSlice';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 export default function TheOptionBar() {
   
-  let dispatch = useDispatch()
-  let paperHight = useSelector(selectPaperHeight)
+  let dispatch = useAppDispatch()
+  let paperHight = useAppSelector(selectPaperHeight)
 
   
   function onHeightInputChange(e){

@@ -1,13 +1,17 @@
-import { useRef } from "react"
-import { useDispatch } from "react-redux"
-import { setSelectedPiece, setShapeStyle, setShapeStylePayload } from "../../../store/editorSlice"
-
-
+import { selectSelectedPieceIndex, setSelectedPiece, setShapeStyle } from "../../../store/editorSlice"
+import { useAppDispatch, useAppSelector } from "../../../store/hooks"
+import './Shape.css'
 export default function Shape(props) {
   let { piecesElement, shapeStyle: { left, top }, bindKey:pieceIndex } = props
-  const dispatch = useDispatch()
+  let selectedPieceIndex = useAppSelector(selectSelectedPieceIndex)
+  const dispatch = useAppDispatch()
 
   function mouseDownHandler(e) {
+    console.log(selectedPieceIndex,pieceIndex);
+    
+    
+    dispatch(setSelectedPiece({selectedPieceIndex:pieceIndex}))
+
     const initialOffsetLeft = e.target.offsetParent.offsetLeft
     const initialOffsetTop = e.target.offsetParent.offsetTop
 
@@ -26,7 +30,8 @@ export default function Shape(props) {
       }))
     }
 
-    const up = () => {
+    const up = (e) => {
+      e.stopImmediatePropagation()
       document.removeEventListener('mousemove', move)
       document.removeEventListener('mouseup', up)
     }
@@ -34,9 +39,6 @@ export default function Shape(props) {
     document.addEventListener('mouseup', up)
   }
 
-  // function clickHandler(){
-  //   dispatch(setSelectedPiece({pieceIndex}))
-  // }
 
   return (
     <div
@@ -45,8 +47,8 @@ export default function Shape(props) {
         left: left + 'px',
         top: top + 'px'
       }}
+      className={selectedPieceIndex===pieceIndex?'active':''}
       onMouseDown={mouseDownHandler}
-      // onClick={clickHandler}
     >
       {
         piecesElement

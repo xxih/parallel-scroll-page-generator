@@ -1,3 +1,4 @@
+import { PieceType } from '../../store/editorSlice';
 import './TheMenu.css'
 export default function TheMenu() {
 
@@ -5,7 +6,7 @@ export default function TheMenu() {
     console.log(e);
     
   }
-  function dragStartHandler(e:React.DragEvent,type:string){
+  function dragStartHandler(e:React.DragEvent,type:PieceType){
     // console.log(e,com);
     e.dataTransfer.setData('type',type)
   }
