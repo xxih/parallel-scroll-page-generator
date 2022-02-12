@@ -1,0 +1,7 @@
+.editor-paper>.active{
+  border:0.5px solid var(--primary-color);
+}
+.ps-shape{
+  border:0.5px solid rgba(255, 255, 255, 0);
+  cursor: pointer;
+}

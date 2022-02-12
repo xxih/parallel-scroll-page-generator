@@ -3,9 +3,10 @@ import { Input,message, Switch, Button } from 'antd';
 import { changePaperHeight, selectPaperHeight } from '../../store/globalParamSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { deletePiece, setSelectedPiece } from '../../store/editorSlice';
+import { useNavigate } from 'react-router-dom';
 
 export default function TheOptionBar() {
-  
+  let navigate = useNavigate()
   let dispatch = useAppDispatch()
   let selectedPieceIndex = useAppSelector(state=>state.editor.selectedPieceIndex)
   let paperHight = useAppSelector(selectPaperHeight)
@@ -30,6 +31,17 @@ export default function TheOptionBar() {
     }
   }
 
+  function changeHandler(checked,e){
+    if(checked){
+      navigate('/preview')
+    }
+    else{
+      navigate('/')
+    }
+    
+
+  }
+
   return(
   <div className='ps-layout-top ps-bar'>
     {/* <Button className='ps-bar-btn'>撤销</Button> */}
@@ -46,7 +58,7 @@ export default function TheOptionBar() {
     />
     <span className='ps-bar-text ps-bar-text-close'>px</span>
     <span className='ps-bar-text'>预览模式：</span>
-    <Switch className='ps-bar-switch'/>
+    <Switch className='ps-bar-switch' onChange={changeHandler}/>
   </div>
   )}
 
