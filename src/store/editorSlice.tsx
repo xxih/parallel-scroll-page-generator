@@ -5,7 +5,7 @@ export {type PieceType,type PieceData}
 type EditorState = {
   piecesData:Array<PieceData>,
   countPieceIndex:number,
-  selectedPieceIndex:number
+  selectedPieceIndex:number,
 }
 
 type PieceType = 'text'|'image'
@@ -13,7 +13,9 @@ type PieceType = 'text'|'image'
 type PieceData = {
   type:PieceType,
   shapeStyle:ShapeStyle,
-  pieceIndex:number
+  pieceIndex:number,
+  parallelEffect?:Object
+  visualEffect?:Object
 }
 
 const initialState:EditorState = {

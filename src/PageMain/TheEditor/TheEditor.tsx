@@ -2,7 +2,7 @@ import { useAppDispatch,useAppSelector } from '../../store/hooks';
 import { addPiece, PieceData, PieceType, setSelectedPiece } from '../../store/editorSlice';
 import { selectPaperHeight } from '../../store/globalParamSlice';
 import './TheEditor.css'
-import Text from './Components/VText';
+import VText from './Components/VText';
 import Shape from './Components/Shape';
 
 export default function TheEditor() {
@@ -23,7 +23,7 @@ export default function TheEditor() {
           <Shape 
             key={item.pieceIndex}
             bindKey={item.pieceIndex}
-            piecesElement={<Text text="请输入文字"/>} 
+            piecesElement={<VText text="请输入文字"/>} 
             shapeStyle={item.shapeStyle}
           />)
         }
@@ -40,7 +40,7 @@ export default function TheEditor() {
       shapeStyle:{
         left:offsetX+'px',
         top:offsetY+'px',
-        width:72+'px',
+        width:73+'px',
         height:24+'px'
       }
     }

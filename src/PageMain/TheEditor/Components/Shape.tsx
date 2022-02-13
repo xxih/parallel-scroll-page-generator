@@ -81,8 +81,6 @@ export default function Shape(props) {
     }
     if (pointList.length !== 0) {
       return pointList.map(item => {
-        console.log(item);
-        
         let style = getPointStyle(item)
         return (
           // <div

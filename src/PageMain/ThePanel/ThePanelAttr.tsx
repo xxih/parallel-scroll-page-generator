@@ -6,7 +6,7 @@ export default function ThePanelAttr() {
   return <div>
     {
       Object.entries(piecesData[selectedPieceIndex].shapeStyle).map(([key,value])=>{
-        return <div>{key+' '+value}</div>
+        return <div key={key}>{key+' '+value}</div>
       })
     }
   </div>;

@@ -1,7 +1,7 @@
-import './VText.css'
+import './PText.css'
 type Props = {
   text:string
 }
-export default function VText({text}:Props) {
+export default function PText({text}:Props) {
   return <div className="ps-v-text">{text}</div>;
 }

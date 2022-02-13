@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type globalState = {
   paperHeight:number,
@@ -14,11 +14,16 @@ export const slice = createSlice({
   reducers: {
     changePaperHeight:(state,action) =>{
       state.paperHeight = action.payload.paperHeight
+    },
+    setPreviewMode:(state,action:PayloadAction<{
+      previewMode:boolean
+    }>)=>{
+      state.previewMode = action.payload.previewMode
     }
   },
 });
 
-export const { changePaperHeight } = slice.actions;
+export const { changePaperHeight, setPreviewMode } = slice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This

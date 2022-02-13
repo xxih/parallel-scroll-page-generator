@@ -1,7 +1,8 @@
 .editor-paper>.active{
   border:0.5px solid var(--primary-color);
 }
-.ps-shape{
+.ps-pshape{
   border:0.5px solid rgba(255, 255, 255, 0);
-  cursor: pointer;
+  /* 预览模式不需要 */
+  /* cursor: pointer; */
 }

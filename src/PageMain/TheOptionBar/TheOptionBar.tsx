@@ -1,6 +1,6 @@
 import './TheOptionBar.css'
 import { Input,message, Switch, Button } from 'antd';
-import { changePaperHeight, selectPaperHeight } from '../../store/globalParamSlice';
+import { changePaperHeight, selectPaperHeight, setPreviewMode } from '../../store/globalParamSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { deletePiece, setSelectedPiece } from '../../store/editorSlice';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,8 @@ export default function TheOptionBar() {
   let navigate = useNavigate()
   let dispatch = useAppDispatch()
   let selectedPieceIndex = useAppSelector(state=>state.editor.selectedPieceIndex)
+  let previewMode = useAppSelector(state=>state.globalParam.previewMode)
+  
   let paperHight = useAppSelector(selectPaperHeight)
 
   
@@ -34,12 +36,12 @@ export default function TheOptionBar() {
   function changeHandler(checked,e){
     if(checked){
       navigate('/preview')
+      dispatch(setPreviewMode({previewMode:true}))
     }
     else{
       navigate('/')
+      dispatch(setPreviewMode({previewMode:false}))
     }
-    
-
   }
 
   return(
@@ -55,6 +57,7 @@ export default function TheOptionBar() {
       placeholder='667~10000' 
       defaultValue={paperHight}
       onPressEnter={onHeightInputChange}
+      disabled={previewMode?true:false}
     />
     <span className='ps-bar-text ps-bar-text-close'>px</span>
     <span className='ps-bar-text'>预览模式：</span>
