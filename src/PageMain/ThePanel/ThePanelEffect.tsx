@@ -62,6 +62,7 @@ export default function ThePanelEffect() {
                 value={item.param}
                 min={effectsInfo[item.effectName].scope[0]} 
                 max={effectsInfo[item.effectName].scope[1]}
+                step={0.01}
                 onChange={(value)=>{changeSliderHandler(index,value)}}
               />
             }

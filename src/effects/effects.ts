@@ -19,20 +19,18 @@ export let mapNameEffect = {
   parallelHorizontal:'水平视差',
   none:'无效果'
 }
-// export type TypeEffectItem = {
-//   param?:number,
-//   effectName?:TypeEffectItemName
-// }
 
 let parallelVertical = {
   // 这是给界面用的
   scope:[-2,2],
   bindedEvent:'scroll',
   // 这是用来绑定的函数
-  func(initLeft:string,initTop:string,speed:number,element:HTMLElement){
+  func(element:HTMLElement,param:number,){
+    // let initLeft = element.style.left
+    let initTop  = element.style.top
     return function(scrollTop:number){
-      element.style.left = parseInt(initLeft)-scrollTop*speed+'px'
-      element.style.top = parseInt(initTop)-scrollTop*speed+'px'
+      // element.style.left = parseInt(initLeft)-scrollTop*param+'px'
+      element.style.top = parseInt(initTop)-scrollTop*param+'px'
     }
   }
 }
@@ -41,12 +39,14 @@ let parallelHorizontal = {
   scope:[-2,2],
   bindedEvent:'scroll',
   // 这是用来绑定的函数
-  func(initLeft:string,initTop:string,speed:number,element:HTMLElement){
+  func(element:HTMLElement,param:number,){
+    let initLeft = element.style.left
+    // let initTop  = element.style.top
     return function(scrollTop:number){
-      element.style.left= parseInt(initLeft)-scrollTop*speed+'px'
-      element.style.top= parseInt(initTop)-scrollTop*speed+'px'
+      element.style.left = parseInt(initLeft)-scrollTop*param+'px'
+      // element.style.top = parseInt(initTop)-scrollTop*param+'px'
     }
-  },
+  }
 }
 
 

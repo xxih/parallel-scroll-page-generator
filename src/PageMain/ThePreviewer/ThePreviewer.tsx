@@ -5,7 +5,7 @@ import './ThePreviewer.css'
 import PText from './Components/PText';
 import PShape from './Components/PShape';
 import { useEffect, useRef } from 'react';
-import effectsParallel from '../../effects/effects';
+import effects from '../../effects/effects';
 
 export default function ThePreviewer() {
   // const dispatch = useAppDispatch()
@@ -18,35 +18,46 @@ export default function ThePreviewer() {
 // 负责绑定事件
   useEffect(()=>{
     // 需要调用的视差代码
-    let funcArrayParallel = []
-    // 需要调用的视觉代码
-    let funcArrayVisual = []
+    let funcArray = []
 
     // 遍历 pieces 得到两个 func 数组
-    // piecesData.forEach((cur)=>{
-    //   if(cur){
-    //     let element = document.getElementById('shape'+cur.pieceIndex)
-    //     let initLeft = cur.shapeStyle.left
-    //     let initTop = cur.shapeStyle.top
-    //     let func
-    //     if(cur.effects.parallelEffect.typeEffect!=='none'){
-    //       func = effectsParallel[cur.effects.parallelEffect.typeEffect].func(element)
-    //     }
-    //     funcArrayParallel.push(func)
-    //   }
-    // },[])
+    piecesData.forEach((cur)=>{
+      if(cur){
+        let element = document.getElementById('shape'+cur.pieceIndex)
+        cur.effects.forEach((item)=>{
+          if(item.effectName==='none'){}
+          else{
+            funcArray.push(effects[item.effectName].func(element,item.param))
+          }
+        })
+      }
+
+      // if(cur){
+      //   let element = document.getElementById('shape'+cur.pieceIndex)
+      //   let initLeft = cur.shapeStyle.left
+      //   let initTop = cur.shapeStyle.top
+      //   let func
+      //   if(cur.effects.parallelEffect.typeEffect!=='none'){
+      //     func = effectsParallel[cur.effects].func(element)
+      //   }
+      //   funcArrayParallel.push(func)
+      // }
+    },[])
 
     // piecesData.forEach((cur)=>{
     //   // 遍历 cur.Effects 根据 cur 和 effects
     // })
 
-    // let bodyElement = document.getElementById('editor-body')
-    // bodyElement.addEventListener('scroll',function(e){
-    //   let scrollTop = (e.target as any).scrollTop
-    //   funcArrayParallel.forEach((item)=>{
-    //     item(scrollTop)
-    //   })
-    // })
+    let bodyElement = document.getElementById('editor-body')
+    bodyElement.addEventListener('scroll',function(e){
+      let scrollTop = (e.target as any).scrollTop
+      funcArray.forEach((item)=>{
+        // 这个函数，需要 piece 的 Dom 实例。
+        // 需要参数
+        // 必须在这里接住 scrollTop
+        item(scrollTop)
+      })
+    })
 
     // return ()=>{
     // }
