@@ -5,6 +5,7 @@ import './ThePreviewer.css'
 import PText from './Components/PText';
 import PShape from './Components/PShape';
 import { useEffect, useRef } from 'react';
+import effectsParallel from '../../effects/effects';
 
 export default function ThePreviewer() {
   // const dispatch = useAppDispatch()
@@ -14,34 +15,41 @@ export default function ThePreviewer() {
   let piecesData = useAppSelector(state=>state.editor.piecesData)
 
 
-
+// 负责绑定事件
   useEffect(()=>{
-    console.log(1);
-    
-    let all = piecesData.reduce((allData,cur)=>{
-      if(cur){
-        let element = document.getElementById('shape'+cur.pieceIndex)
-        let initLeft = cur.shapeStyle.left
-        let initTop = cur.shapeStyle.top
-        function func(scrollTop){
-          element.style.left= parseInt(initLeft)-scrollTop*0.5+'px'
-          element.style.top= parseInt(initTop)-scrollTop*0.5+'px'
-        }
-        allData.push(func)
-        return allData
-      }
-    },[])
-    let bodyElement = document.getElementById('editor-body')
-    bodyElement.addEventListener('scroll',function(e){
-      let scrollTop = (e.target as any).scrollTop
-      all.forEach((item)=>{
-        item(scrollTop)
-      })
-    })
+    // 需要调用的视差代码
+    let funcArrayParallel = []
+    // 需要调用的视觉代码
+    let funcArrayVisual = []
 
-    return ()=>{
-      console.log(2);
-    }
+    // 遍历 pieces 得到两个 func 数组
+    // piecesData.forEach((cur)=>{
+    //   if(cur){
+    //     let element = document.getElementById('shape'+cur.pieceIndex)
+    //     let initLeft = cur.shapeStyle.left
+    //     let initTop = cur.shapeStyle.top
+    //     let func
+    //     if(cur.effects.parallelEffect.typeEffect!=='none'){
+    //       func = effectsParallel[cur.effects.parallelEffect.typeEffect].func(element)
+    //     }
+    //     funcArrayParallel.push(func)
+    //   }
+    // },[])
+
+    // piecesData.forEach((cur)=>{
+    //   // 遍历 cur.Effects 根据 cur 和 effects
+    // })
+
+    // let bodyElement = document.getElementById('editor-body')
+    // bodyElement.addEventListener('scroll',function(e){
+    //   let scrollTop = (e.target as any).scrollTop
+    //   funcArrayParallel.forEach((item)=>{
+    //     item(scrollTop)
+    //   })
+    // })
+
+    // return ()=>{
+    // }
   },[])
 
   // 负责处理整个渲染流程

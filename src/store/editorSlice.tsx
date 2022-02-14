@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { TypeEffectItem,TypeEffectItemName } from '../effects/effects';
 
 export {type PieceType,type PieceData}
 
@@ -8,20 +9,21 @@ type EditorState = {
   selectedPieceIndex:number,
 }
 
-type PieceType = 'text'|'image'
-
 type PieceData = {
   type:PieceType,
   shapeStyle:ShapeStyle,
   pieceIndex:number,
-  parallelEffect?:Object
-  visualEffect?:Object
+  effects:Array<TypeEffectItem>
 }
+
+type PieceType = 'text'|'image'
+
+
 
 const initialState:EditorState = {
   piecesData:[],
   countPieceIndex:0,
-  selectedPieceIndex:-1
+  selectedPieceIndex:-1,
 }
 
 type ShapeStyle = {
@@ -39,9 +41,10 @@ export const slice = createSlice({
       type:'image'|'text',
       shapeStyle:ShapeStyle
     }>) =>{
-      let payload = {
+      let payload:PieceData = {
         ...action.payload,
-        pieceIndex:state.countPieceIndex
+        pieceIndex:state.countPieceIndex,
+        effects:[]
       }
       state.piecesData[state.countPieceIndex]=payload
       state.countPieceIndex++
@@ -64,8 +67,38 @@ export const slice = createSlice({
       selectedPieceIndex:number
     }>)=>{
       state.selectedPieceIndex = action.payload.selectedPieceIndex
+    },
+    addEffectToSelectedPiece:(state,action)=>{
+      state.piecesData[state.selectedPieceIndex].effects.push({
+        effectName:'none',
+        param:0
+      })
+    },
+    setSelectedEffectItem:(state,action:PayloadAction<{
+      effectIndex:number,
+      TypeEffectItem:TypeEffectItem
+    }>)=>{
+      state.piecesData[state.selectedPieceIndex].effects[action.payload.effectIndex] = {
+        ...state.piecesData[state.selectedPieceIndex].effects[action.payload.effectIndex],
+        ...action.payload.TypeEffectItem
+      }
     }
-  },
+    // setSelectedParallelEffect:(state,action:PayloadAction<{
+    //   parallelEffect:TypeEffectAttrParallel
+    // }>)=>{
+      // state.piecesData[state.selectedPieceIndex].effects.parallelEffect = {
+      //   ...state.piecesData[state.selectedPieceIndex].effects.parallelEffect,
+      //   ...action.payload.parallelEffect
+      }
+    // }
+    // setSelectedVisualEffect:(state,action:PayloadAction<{
+    //   pieceIndex:number,
+
+    //   typeEffect:TypeEffectAttrParallel
+    // }>)=>{
+
+    // }
+  // },
 });
 
 
@@ -73,7 +106,9 @@ export const slice = createSlice({
 export const { addPiece,
   deletePiece,
   setShapeStyle,
-  setSelectedPiece
+  setSelectedPiece,
+  setSelectedEffectItem,
+  addEffectToSelectedPiece
 } = slice.actions;
 
 

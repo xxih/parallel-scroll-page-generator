@@ -1,8 +1,8 @@
 import { Menu } from "antd";
 import { useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
 import { useAppSelector } from "../../store/hooks";
 import ThePanelAttr from "./ThePanelAttr";
+import ThePanelEffect from "./ThePanelEffect";
 export default function ThePanel() {
   let selectedPieceIndex = useAppSelector(state=>state.editor.selectedPieceIndex)
   let [currentPanel,setCurrentPanel] = useState('attr')
@@ -20,7 +20,7 @@ export default function ThePanel() {
         return <ThePanelAttr/>
       }
       else if(currentPanel==='effect'){
-        return 
+        return <ThePanelEffect/>
       }
     }
   }
@@ -37,6 +37,5 @@ export default function ThePanel() {
     {
       renderPanel()
     }
-
   </div>;
 }

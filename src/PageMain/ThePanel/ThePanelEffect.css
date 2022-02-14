@@ -1,0 +1,10 @@
+.ps-panel-effect-container{
+  padding: 20px;
+}
+.ps-panel-effect-container-item:nth-child(n+2){
+  margin-top: 20px;
+}
+.ps-panel-effect-button:not(:first-child){
+  margin-top: 20px;
+
+}
