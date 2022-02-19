@@ -1,104 +1,107 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TypeEffectItem,TypeEffectItemName } from '../effects/effects';
+import { TypeEffectItem, TypeEffectItemName } from '../effects/effects';
 
-export {type PieceType,type PieceData}
+export { type PieceType, type PieceData }
 
 type EditorState = {
-  piecesData:Array<PieceData>,
-  countPieceIndex:number,
-  selectedPieceIndex:number,
+  piecesData: Array<PieceData>,
+  countPieceIndex: number,
+  selectedPieceIndex: number,
 }
 
 type PieceData = {
-  type:PieceType,
-  shapeStyle:ShapeStyle,
-  pieceIndex:number,
-  effects:Array<TypeEffectItem>
+  type: PieceType,
+  shapeStyle: ShapeStyle,
+  pieceIndex: number,
+  effects: Array<TypeEffectItem>,
+  param: {
+    text?: string,
+  }
 }
 
-type PieceType = 'text'|'image'
+type PieceType = 'text' | 'image'
 
 
 
-const initialState:EditorState = {
-  piecesData:[],
-  countPieceIndex:0,
-  selectedPieceIndex:-1,
+const initialState: EditorState = {
+  piecesData: [],
+  countPieceIndex: 0,
+  selectedPieceIndex: -1,
 }
 
 type ShapeStyle = {
-  left?:string,
-  top?:string,
-  width?:string,
-  height?:string
+  left?: string,
+  top?: string,
+  width?: string,
+  height?: string
 }
 
 export const slice = createSlice({
   name: 'editor',
   initialState,
   reducers: {
-    addPiece:(state,action:PayloadAction<{
-      type:'image'|'text',
-      shapeStyle:ShapeStyle
-    }>) =>{
-      let payload:PieceData = {
+    // 向 editor 里添加 piece
+    addPiece: (state, action: PayloadAction<{
+      type: 'image' | 'text',
+      shapeStyle: ShapeStyle
+    }>) => {
+      let payload: PieceData = {
         ...action.payload,
-        pieceIndex:state.countPieceIndex,
-        effects:[]
+        pieceIndex: state.countPieceIndex,
+        effects: [],
+        param: {
+          text: '请输入文本'
+        }
       }
-      state.piecesData[state.countPieceIndex]=payload
+      state.piecesData[state.countPieceIndex] = payload
       state.countPieceIndex++
     },
-    deletePiece:(state,action:PayloadAction<{
-      pieceIndex:number
-    }>)=>{
+    // 删除 piece
+    deletePiece: (state, action: PayloadAction<{
+      pieceIndex: number
+    }>) => {
       state.piecesData[action.payload.pieceIndex] = null
     },
-    setShapeStyle:(state,action:PayloadAction<{
-      pieceIndex:number,
-      shapeStyle:ShapeStyle
-    }>)=>{
+    // piece 在 editor 中是由一个 Shape 再套一个其他组件组成的
+    // 这里可以设置它的 style
+    setShapeStyle: (state, action: PayloadAction<{
+      pieceIndex: number,
+      shapeStyle: ShapeStyle
+    }>) => {
       state.piecesData[action.payload.pieceIndex].shapeStyle = {
         ...state.piecesData[action.payload.pieceIndex].shapeStyle,
         ...action.payload.shapeStyle
       }
     },
-    setSelectedPiece:(state,action:PayloadAction<{
-      selectedPieceIndex:number
-    }>)=>{
+    // 当前选中的 piece
+    setSelectedPiece: (state, action: PayloadAction<{
+      selectedPieceIndex: number
+    }>) => {
       state.selectedPieceIndex = action.payload.selectedPieceIndex
     },
-    addEffectToSelectedPiece:(state,action)=>{
+    // 给当前选中的 piece 添加一个效果项
+    addEffectToSelectedPiece: (state, action) => {
       state.piecesData[state.selectedPieceIndex].effects.push({
-        effectName:'none',
-        param:0
+        effectName: 'none',
+        param: 0
       })
     },
-    setSelectedEffectItem:(state,action:PayloadAction<{
-      effectIndex:number,
-      TypeEffectItem:TypeEffectItem
-    }>)=>{
+    // 设置效果项
+    setSelectedEffectItem: (state, action: PayloadAction<{
+      effectIndex: number,
+      TypeEffectItem: TypeEffectItem
+    }>) => {
       state.piecesData[state.selectedPieceIndex].effects[action.payload.effectIndex] = {
         ...state.piecesData[state.selectedPieceIndex].effects[action.payload.effectIndex],
         ...action.payload.TypeEffectItem
       }
+    },
+    setSelectedText:(state, action: PayloadAction<{
+      text:string
+    }>)=>{
+      state.piecesData[state.selectedPieceIndex].param.text=action.payload.text
     }
-    // setSelectedParallelEffect:(state,action:PayloadAction<{
-    //   parallelEffect:TypeEffectAttrParallel
-    // }>)=>{
-      // state.piecesData[state.selectedPieceIndex].effects.parallelEffect = {
-      //   ...state.piecesData[state.selectedPieceIndex].effects.parallelEffect,
-      //   ...action.payload.parallelEffect
-      }
-    // }
-    // setSelectedVisualEffect:(state,action:PayloadAction<{
-    //   pieceIndex:number,
-
-    //   typeEffect:TypeEffectAttrParallel
-    // }>)=>{
-
-    // }
-  // },
+  }
 });
 
 
@@ -108,7 +111,8 @@ export const { addPiece,
   setShapeStyle,
   setSelectedPiece,
   setSelectedEffectItem,
-  addEffectToSelectedPiece
+  addEffectToSelectedPiece,
+  setSelectedText
 } = slice.actions;
 
 

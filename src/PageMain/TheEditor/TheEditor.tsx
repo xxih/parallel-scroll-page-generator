@@ -15,6 +15,7 @@ export default function TheEditor() {
   function renderList(piecesData:Array<PieceData>){
     if(piecesData.length!==0){
       return piecesData.map((item)=>{
+        //
         if(item===null){
           
         }
@@ -23,7 +24,7 @@ export default function TheEditor() {
           <Shape 
             key={item.pieceIndex}
             bindKey={item.pieceIndex}
-            piecesElement={<VText text="请输入文字"/>} 
+            piecesElement={<VText text={item.param.text?item.param.text:'请输入文本'}/>} 
             shapeStyle={item.shapeStyle}
           />)
         }
@@ -46,13 +47,33 @@ export default function TheEditor() {
     }
     dispatch(addPiece(transferObj))
   }
+  // 事件委托
   function clickHandler(e){
     if(e.currentTarget===e.target){
-
       dispatch(setSelectedPiece({selectedPieceIndex:-1}))
     }
     
     // if(e.target===)
+  }
+
+  function renderLine(){
+    let pageCount = paperHeight/667
+    let lineTopArr = []
+    for(let n = 0;n<pageCount;n++){
+      lineTopArr.push((n+1)*667)
+    }
+    return lineTopArr.map((item,index)=>
+      <div 
+        key={index} 
+        style={{
+        width:'100%',
+        height:'1px',
+        position:'absolute',
+        top:item+'px',
+        backgroundColor:'red'
+      }}></div>
+    )
+
   }
 
   return (
@@ -68,6 +89,9 @@ export default function TheEditor() {
         onDrop={(e)=>{dropHandler(e)}}>
         {
           renderList(piecesData)
+        }
+        {
+          renderLine()
         }
       </div>
     </div>
