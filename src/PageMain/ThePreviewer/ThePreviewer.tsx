@@ -75,7 +75,7 @@ export default function ThePreviewer() {
           return <PShape
             key={item.pieceIndex}
             bindKey={item.pieceIndex}
-            piecesElement={<PText text="请输入文字"/>} 
+            piecesElement={<PText text={item.param.text?item.param.text:'请输入文本'}/>} 
             shapeStyle={item.shapeStyle}
           />
         }
