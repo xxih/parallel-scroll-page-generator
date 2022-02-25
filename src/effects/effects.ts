@@ -26,14 +26,10 @@ let parallelVertical = {
   bindedEvent:'scroll',
   // 这是用来绑定的函数
   func(element:HTMLElement,param:number,){
-    // let initLeft = element.style.left
     let initTop  = element.style.top
     let bound = Math.floor(parseInt(initTop)/667)*667
     return function(scrollTop:number){
-      // element.style.left = parseInt(initLeft)-scrollTop*param+'px'
-      // element.style.top = scrollTop>bound ? parseInt(initTop)-(scrollTop-bound)*param+'px': initTop
-      
-      element.style.transform = 'translateY('+(scrollTop-bound)*param+'px)'
+      element.style.transform = 'translateY('+(scrollTop>bound?(scrollTop-bound)*param:0)+'px)'
     }
   }
 }
@@ -44,15 +40,10 @@ let parallelHorizontal = {
   // 这是用来绑定的函数
   
   func(element:HTMLElement,param:number,){
-    // let initLeft = element.style.left
-    
     let initTop  = element.style.top
     let bound = Math.floor(parseInt(initTop)/667)*667
-    // let initTop  = element.style.top
     return function(scrollTop:number){
-      // element.style.left = scrollTop>bound ? parseInt(initLeft)-(scrollTop-bound)*param+'px':initLeft
-      // element.style.top = parseInt(initTop)-scrollTop*param+'px'
-      element.style.transform = 'translateX('+(scrollTop-bound)*param+'px)'
+      element.style.transform = 'translateX('+ (scrollTop>bound?(scrollTop-bound)*param:0)+'px)'
     }
   }
 }
