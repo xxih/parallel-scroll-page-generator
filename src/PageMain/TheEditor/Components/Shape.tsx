@@ -1,5 +1,3 @@
-import React, { useEffect } from "react"
-import { transform } from "typescript"
 import { setSelectedPiece, setShapeStyle } from "../../../store/editorSlice"
 import { useAppDispatch, useAppSelector } from "../../../store/hooks"
 import './Shape.css'
@@ -83,19 +81,6 @@ export default function Shape(props) {
       return pointList.map(item => {
         let style = getPointStyle(item)
         return (
-          // <div
-          //   key={item}
-          
-          //   style={{
-          //     width: '6px',
-          //     height: '6px',
-          //     borderRadius: '50%',
-          //     backgroundColor: 'white',
-          //     border:'1px solid var(--primary-color)',
-          //     position: 'absolute',
-          //     ...style
-          //   }} />
-            
             <ShapePoint
               pointType={item}
               key={item}

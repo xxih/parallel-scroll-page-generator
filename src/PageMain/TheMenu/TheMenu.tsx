@@ -2,12 +2,7 @@ import { PieceType } from '../../store/editorSlice';
 import './TheMenu.css'
 export default function TheMenu() {
 
-  function dragHandler(e:any,com:any){
-    console.log(e);
-    
-  }
   function dragStartHandler(e:React.DragEvent,type:PieceType){
-    // console.log(e,com);
     e.dataTransfer.setData('type',type)
   }
   return (

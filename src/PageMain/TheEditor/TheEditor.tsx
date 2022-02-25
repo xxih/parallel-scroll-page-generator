@@ -11,13 +11,11 @@ export default function TheEditor() {
   let paperHeight = useAppSelector(selectPaperHeight)
   let piecesData = useAppSelector(state=>state.editor.piecesData)
 
-  // 负责处理整个渲染流程
+  // 负责渲染所有 pieces
   function renderList(piecesData:Array<PieceData>){
     if(piecesData.length!==0){
       return piecesData.map((item)=>{
-        //
         if(item===null){
-          
         }
         else if(item.type==='text'){
           return(
@@ -33,7 +31,7 @@ export default function TheEditor() {
   }
   
   function dropHandler(e:React.DragEvent){
-    // drop 得 dragOver preventDefault 才能成功
+    // drop 得 dragOver preventDefault 才能成功，暂时不知道为什么，待查
     const type  = e.dataTransfer.getData('type') as PieceType
     const { offsetX,offsetY } = e.nativeEvent
     let transferObj = {
@@ -47,13 +45,11 @@ export default function TheEditor() {
     }
     dispatch(addPiece(transferObj))
   }
-  // 事件委托
+  // 事件委托 哈我觉得这里很好玩。之前好像没怎么利用过 target 和 currentTarget
   function clickHandler(e){
     if(e.currentTarget===e.target){
       dispatch(setSelectedPiece({selectedPieceIndex:-1}))
     }
-    
-    // if(e.target===)
   }
 
   function renderLine(){

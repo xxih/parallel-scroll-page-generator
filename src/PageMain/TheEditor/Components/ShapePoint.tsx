@@ -44,7 +44,6 @@ export default function ShapePoint(props) {
           dispatch(setShapeStyle({
             pieceIndex:selectedPieceIndex,
             shapeStyle:{
-              // 对上面的点 右边的点
               height:(heightVal-disY)>=0?heightVal-disY+'px':'0px',//y
               width:(widthVal-disX)>=0?widthVal-disX+'px':'0px',//y
               top:(heightVal-disY)>=0?topVal+disY+'px':topVal+heightVal+'px',//y
@@ -56,7 +55,6 @@ export default function ShapePoint(props) {
             dispatch(setShapeStyle({
               pieceIndex:selectedPieceIndex,
               shapeStyle:{
-                // 对上面的点来说，-disY 是
                 height:(heightVal-disY)>=0?heightVal-disY+'px':'0px', //y
                 width:(widthVal-disX)>=0?widthVal+disX+'px':'0px', //
                 top:(heightVal-disY)>=0?topVal+disY+'px':topVal+heightVal+'px', //y
@@ -67,7 +65,6 @@ export default function ShapePoint(props) {
             dispatch(setShapeStyle({
               pieceIndex:selectedPieceIndex,
               shapeStyle:{
-                // 对上面的点来说，-disY 是
                 height:(heightVal+disY)>=0?heightVal+disY+'px':'0px',
                 width:(widthVal+disX)>=0?widthVal+disX+'px':'0px', //
                 // top:(heightVal-disY)>=0?topVal+disY+'px':heightVal+'px',
@@ -79,7 +76,6 @@ export default function ShapePoint(props) {
             dispatch(setShapeStyle({
               pieceIndex:selectedPieceIndex,
               shapeStyle:{
-                // 对上面的点来说，-disY 是
                 height:(heightVal+disY)>=0?heightVal+disY+'px':'0px',
                 width:(widthVal+disX)>=0?widthVal-disX+'px':'0px', //
                 // top:(heightVal-disY)>=0?topVal+disY+'px':heightVal+'px',
@@ -88,16 +84,8 @@ export default function ShapePoint(props) {
             }))
             break
       }
-      
-      // const newHeight = height + (hasT? -disY : hasB? disY : 0)
-      // const newWidth = width + (hasL? -disX : hasR? disX : 0)
-      // pos.height = newHeight > 0? newHeight : 0
-      // pos.width = newWidth > 0? newWidth : 0
-      // pos.left = left + (hasL? disX : 0)
-      // pos.top = top + (hasT? disY : 0)
-      // this.$store.commit('setShapeStyle', pos)
     }
-    function up(e){
+    function up(){
       document.removeEventListener('mousemove', move)
       document.removeEventListener('mouseup', up)
     }
