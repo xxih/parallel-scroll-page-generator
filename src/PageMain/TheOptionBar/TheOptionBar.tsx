@@ -1,6 +1,6 @@
 import './TheOptionBar.css'
 import { Input,message, Switch, Button } from 'antd';
-import { changePaperHeight, selectPaperHeight, setPreviewMode } from '../../store/globalParamSlice';
+import { changePaperHeight, setPreviewMode } from '../../store/globalParamSlice';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { deletePiece, setSelectedPiece } from '../../store/editorSlice';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ export default function TheOptionBar() {
   let selectedPieceIndex = useAppSelector(state=>state.editor.selectedPieceIndex)
   let previewMode = useAppSelector(state=>state.globalParam.previewMode)
   
-  let paperHight = useAppSelector(selectPaperHeight)
+  let paperHight = useAppSelector(state=>state.globalParam.paperHeight)
 
   
   function onHeightInputChange(e){

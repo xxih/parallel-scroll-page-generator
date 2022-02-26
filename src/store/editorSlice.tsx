@@ -50,7 +50,7 @@ export const slice = createSlice({
         pieceIndex: state.countPieceIndex,
         effects: [],
         param: {
-          text: '请输入文本'
+          text: '搞多点文字测试效果明显搞多点文字测试效果明显搞多点文字测试效果明显'
         }
       }
       state.piecesData[state.countPieceIndex] = payload

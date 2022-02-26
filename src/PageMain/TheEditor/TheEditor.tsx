@@ -1,6 +1,5 @@
 import { useAppDispatch,useAppSelector } from '../../store/hooks';
 import { addPiece, PieceData, PieceType, setSelectedPiece } from '../../store/editorSlice';
-import { selectPaperHeight } from '../../store/globalParamSlice';
 import './TheEditor.css'
 import VText from './Components/VText';
 import Shape from './Components/Shape';
@@ -8,7 +7,7 @@ import Shape from './Components/Shape';
 export default function TheEditor() {
   const dispatch = useAppDispatch()
 
-  let paperHeight = useAppSelector(selectPaperHeight)
+  let paperHeight = useAppSelector(state=>state.globalParam.paperHeight)
   let piecesData = useAppSelector(state=>state.editor.piecesData)
 
   // 负责渲染所有 pieces
@@ -22,7 +21,7 @@ export default function TheEditor() {
           <Shape 
             key={item.pieceIndex}
             bindKey={item.pieceIndex}
-            piecesElement={<VText text={item.param.text?item.param.text:'请输入文本'}/>} 
+            piecesElement={<VText text={item.param.text}/>} 
             shapeStyle={item.shapeStyle}
           />)
         }
@@ -39,8 +38,8 @@ export default function TheEditor() {
       shapeStyle:{
         left:offsetX+'px',
         top:offsetY+'px',
-        width:73+'px',
-        height:24+'px'
+        width:160+'px',
+        height:66+'px'
       }
     }
     dispatch(addPiece(transferObj))

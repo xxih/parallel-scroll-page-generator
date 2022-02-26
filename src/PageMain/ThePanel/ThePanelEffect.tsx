@@ -1,4 +1,4 @@
-import { addEffectToSelectedPiece, PieceData, setSelectedEffectItem } from "../../store/editorSlice"
+import { addEffectToSelectedPiece, setSelectedEffectItem } from "../../store/editorSlice"
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { Select, Slider, Button } from "antd"
 import { mapNameEffect } from "../../effects/effects"
@@ -13,6 +13,7 @@ export default function ThePanelEffect() {
   let piecesData = useAppSelector(state=>state.editor.piecesData)
   let selectedPieceIndex = useAppSelector(state=>state.editor.selectedPieceIndex)
   let pieceEffects = piecesData[selectedPieceIndex].effects
+  let previewMode = useAppSelector(state=>state.globalParam.previewMode)
 
   function clickAddEffectHandler(){
     dispatch(addEffectToSelectedPiece(undefined))
@@ -48,6 +49,7 @@ export default function ThePanelEffect() {
               value={item.effectName} 
               onChange={(value)=>{changeSelectHandler(index,value)}}
               style={{ width: '100%',marginTop:5 }}
+              disabled={previewMode}
             >
               {
                 Object.entries(mapNameEffect).map(([key,value])=>{
@@ -62,15 +64,16 @@ export default function ThePanelEffect() {
                 value={item.param}
                 min={effectsInfo[item.effectName].scope[0]} 
                 max={effectsInfo[item.effectName].scope[1]}
-                step={0.01}
+                step={0.1}
                 onChange={(value)=>{changeSliderHandler(index,value)}}
+                disabled={previewMode}
               />
             }
           </div>
         )
       })
     }
-    <Button onClick={clickAddEffectHandler} className='ps-panel-effect-button'>添加效果</Button>
+    <Button onClick={clickAddEffectHandler} className='ps-panel-effect-button'disabled={previewMode}>添加效果</Button>
   </div>
     
   )

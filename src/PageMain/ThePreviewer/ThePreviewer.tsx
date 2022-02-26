@@ -1,15 +1,14 @@
-import { useAppDispatch,useAppSelector } from '../../store/hooks';
-import { PieceData, PieceType,  } from '../../store/editorSlice';
-import { selectPaperHeight } from '../../store/globalParamSlice';
+import { useAppSelector } from '../../store/hooks';
+import { PieceData  } from '../../store/editorSlice';
 import './ThePreviewer.css'
 import PText from './Components/PText';
 import PShape from './Components/PShape';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import effects from '../../effects/effects';
 
 export default function ThePreviewer() {
 
-  let paperHeight = useAppSelector(selectPaperHeight)
+  let paperHeight = useAppSelector(state=>state.globalParam.paperHeight)
   let piecesData = useAppSelector(state=>state.editor.piecesData)
 
 
@@ -31,17 +30,25 @@ export default function ThePreviewer() {
           }
         })
       }
-    },[])
+    },[piecesData])
 
-
-    let bodyElement = document.getElementById('editor-body')
-    bodyElement.addEventListener('scroll',function(e){
+    let scrollHandler = function(e){
       let scrollTop = (e.target as any).scrollTop
       funcArray.forEach((func)=>{
         // 在这里接住 scrollTop
         func(scrollTop)
       })
-    })
+    }
+    
+    let bodyElement = document.getElementById('editor-body')
+    
+    bodyElement.addEventListener('scroll',scrollHandler)
+    
+    return()=>{
+      console.log('销毁');
+      
+      bodyElement.removeEventListener('scroll',scrollHandler)
+    }
   },[])
 
   // 负责处理整个渲染流程
@@ -56,7 +63,7 @@ export default function ThePreviewer() {
           return <PShape
             key={item.pieceIndex}
             bindKey={item.pieceIndex}
-            piecesElement={<PText text={item.param.text?item.param.text:'请输入文本'}/>} 
+            piecesElement={<PText text={item.param.text}/>} 
             shapeStyle={item.shapeStyle}
           />
         }
