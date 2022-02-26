@@ -15,7 +15,7 @@ export default function TheOptionBar() {
 
   
   function onHeightInputChange(e){
-    if(parseInt((e.target as HTMLInputElement).value)>667&&parseInt((e.target as HTMLInputElement).value)<10000){
+    if(parseInt((e.target as HTMLInputElement).value)>=667&&parseInt((e.target as HTMLInputElement).value)<=10000){
       dispatch(changePaperHeight({paperHeight:(e.target as HTMLInputElement).value}))
       message.success('页面尺寸修改成功！',1)
     }
@@ -47,8 +47,8 @@ export default function TheOptionBar() {
   return(
   <div className='ps-layout-top ps-bar'>
     {/* <Button className='ps-bar-btn'>撤销</Button> */}
-    <Button className='ps-bar-btn'>插入图片</Button>
-    <Button className='ps-bar-btn'>保存</Button>
+    <Button className='ps-bar-btn' disabled>插入图片</Button>
+    <Button className='ps-bar-btn' disabled>保存</Button>
     <Button className='ps-bar-btn' danger onClick={delectClickHandler}>删除</Button>
     <span className='ps-bar-text'>页宽：375 px</span>
     <span className='ps-bar-text'>页高：</span>
