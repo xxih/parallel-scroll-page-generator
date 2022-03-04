@@ -5,6 +5,7 @@ export { type PieceType, type PieceData }
 
 type EditorState = {
   piecesData: Array<PieceData>,
+  // 我已经想出了一个绝佳的解决 index 问题的方法。再开一个对象 zIndexQueryMap 用于在 O(1) 时间查到当前位置的 z-index。插入和删除也都可以是 O(1)，上移和下移也只要 O(1)
   countPieceIndex: number,
   selectedPieceIndex: number,
 }

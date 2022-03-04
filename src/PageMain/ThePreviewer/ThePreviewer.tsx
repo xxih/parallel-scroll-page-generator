@@ -14,13 +14,14 @@ export default function ThePreviewer() {
 
   // 页面渲染完成后，绑定事件
   useEffect(()=>{
-    // 其实这里的逻辑好像也能分离到 effects.ts 去。包装成一个函数，接收 piecesData 返回 func Array
+    // 其实这里的逻辑好像也能分离到 effects.ts 去。包装成一个函数，接收 piecesData 返回 func Array，可能并没有这个必要。
     // 收集需要调用的视差代码
     let funcArray = []
 
     // 遍历 pieces 得到 funcArray 收集到了所有需要在滚动时触发的代码。
     piecesData.forEach((cur)=>{
       if(cur){
+        // 我预感到了
         let element = document.getElementById('shape'+cur.pieceIndex)
         cur.effects.forEach((item)=>{
           if(item.effectName==='none'){}
@@ -30,7 +31,19 @@ export default function ThePreviewer() {
           }
         })
       }
-    },[piecesData])
+    })
+
+    // 上面那样写不好，这里有更好的写法！
+    // 没必要为 每一个 effect 创建一个元素。其实只要为每一个 element 创建一个元素就好。
+    // piecesData.forEach((cur)=>{
+    //   if(cur){
+    //     let element = document.getElementById('shape'+cur.pieceIndex)
+    //     funcArr.push(generateEffect(element,cur.effects))
+    //   }
+    // })
+
+
+
 
     let scrollHandler = function(e){
       let scrollTop = (e.target as any).scrollTop
@@ -43,7 +56,8 @@ export default function ThePreviewer() {
     let bodyElement = document.getElementById('editor-body')
     
     bodyElement.addEventListener('scroll',scrollHandler)
-    
+
+
     return()=>{
       console.log('销毁');
       
